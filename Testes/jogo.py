@@ -62,6 +62,9 @@ if gols_a == gols_b:
 
     # 5 Cobranças Iniciais
     for rodada in range(1, 6):
+        cobrancas_restantes_a = 5 - rodada + 1
+        cobrancas_restantes_b = 5 - rodada + 1
+
         print(f'--- {rodada}ª RODADA DE PÊNALTIS ---')
         
         # Cobrança Time A
@@ -76,6 +79,12 @@ if gols_a == gols_b:
             print(f'⚽ GOOOOOL DO {time_a}!\n')
         time.sleep(1)
 
+        # Checagem se Time A já é inalcançável antes do Time B bater
+        cobrancas_restantes_a -= 1
+        if penaltis_a > penaltis_b + cobrancas_restantes_b or penaltis_b > penaltis_a + cobrancas_restantes_a:
+            print('🏆 Fim das cobranças! Placar inalcançável!\n')
+            break
+
         # Cobrança Time B
         chute_b = random.choice(list(cantos.keys()))
         goleiro_a = random.choice(list(cantos.keys()))
@@ -88,20 +97,26 @@ if gols_a == gols_b:
             print(f'⚽ GOOOOOL DO {time_b}!\n')
         time.sleep(1)
 
-    print(f'PLACAR DOS PÊNALTIS: {time_a} {penaltis_a} X {penaltis_b} {time_b}')
+        cobrancas_restantes_b -= 1
+        if penaltis_a > penaltis_b + cobrancas_restantes_b or penaltis_b > penaltis_a + cobrancas_restantes_a:
+            print('🏆 Fim das cobranças! Placar inalcançável!\n')
+            break
 
-    # Morte Súbita se persistir o empate nos pênaltis
+    print(f'PLACAR DOS PÊNALTIS (5 RODADAS): {time_a} {penaltis_a} X {penaltis_b} {time_b}')
+
+    # Morte Súbita se persistir o empate
     if penaltis_a == penaltis_b:
         print('\n⚠️ CONTINUA EMPATADO! INICIANDO MORTE SÚBITA...\n')
         rodada_extra = 1
         
-        while penaltis_a == penaltis_b:
+        while True:
             print(f'--- MORTE SÚBITA ({rodada_extra}ª RODADA) ---')
             
             # Time A
             chute_a = random.choice(list(cantos.keys()))
             goleiro_b = random.choice(list(cantos.keys()))
-            if chute_a != goleiro_b:
+            gol_a_rodada = chute_a != goleiro_b
+            if gol_a_rodada:
                 penaltis_a += 1
                 print(f'⚽ GOL DO {time_a}!')
             else:
@@ -111,12 +126,17 @@ if gols_a == gols_b:
             # Time B
             chute_b = random.choice(list(cantos.keys()))
             goleiro_a = random.choice(list(cantos.keys()))
-            if chute_b != goleiro_a:
+            gol_b_rodada = chute_b != goleiro_a
+            if gol_b_rodada:
                 penaltis_b += 1
                 print(f'⚽ GOL DO {time_b}!\n')
             else:
                 print(f'❌ {time_b} PERDEU!\n')
             time.sleep(1)
+
+            # Na morte súbita, o jogo só termina se um fizer gol e o outro não na mesma rodada
+            if gol_a_rodada != gol_b_rodada:
+                break
 
             rodada_extra += 1
 
