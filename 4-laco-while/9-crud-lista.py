@@ -25,7 +25,7 @@ while True:
               print(f'{nome} já está cadastrado.')
             else:
               lista_produtos.append(nome)
-            print('Produtos cadastrado com secesso!')
+            print('Produtos cadastrado com sucesso!')
             input('Pressione tecla para continuar...')
         case 2:
             print('\n== PRODUTOS NO ESTOQUE ==')

@@ -7,8 +7,8 @@ while True:
 
     print('''
 === MERCADINHO DENDEZEIROS ===
-1 - Cadastrar produtos
-2 - Listar produtos
+1 - Cadastrar numeros de série
+2 - Listar numeros de séries
 0 - Sair
 ''')
 
