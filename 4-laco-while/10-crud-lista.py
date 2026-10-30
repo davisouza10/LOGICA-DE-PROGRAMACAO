@@ -3,44 +3,47 @@ import os
 numero_serie = []
 
 while True:
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
 
     print('''
-=== MERCADINHO DENDEZEIROS ==
+=== MERCADINHO DENDEZEIROS ===
 1 - Cadastrar produtos
-2 - Lista produtos
-0 - Sair)
+2 - Listar produtos
+0 - Sair
 ''')
 
-    opcao = int(input('Escolha uma opção: '))
+    opcao = input('Escolha uma opção: ').strip()
 
     match opcao:
-        case 1:
+        case '1':
             print('\n== CADASTRO DE NÚMEROS DE SÉRIE ==')
-
-            nome =int(input('Digite o número de série: ')).strip().upper()
+            nome = input('Digite o número de série: ').strip().upper()
+            
             if nome == '':
-              print('O número não pode ficar vazio.')
+                print('O número não pode ficar vazio.')
             elif nome in numero_serie:
-              print(f'{nome} já está cadastrado.')
+                print(f'{nome} já está cadastrado.')
             else:
-              numero_serie.append(nome)
-            print('Produtos cadastrado com secesso!')
-            input('Pressione tecla para continuar...')
-        case 2:
-            print('\n== NUMERO DE SÉRIE ==')
-            if len(numero_serie) == 0:
+                numero_serie.append(nome)
+                print('Produto cadastrado com sucesso!')
+            
+            input('\nPressione ENTER para continuar...')
+
+        case '2':
+            print('\n== NÚMEROS DE SÉRIE ==')
+            if not numero_serie:
                 print('O estoque está vazio.')
             else:
-                for i, produto in enumerate(numero_serie):
-                  print(f'{i+1}. {produto}')
+                for i, produto in enumerate(numero_serie, start=1):
+                    print(f'{i}. {produto}')
+                print(f'\nTotal de números de série: {len(numero_serie)}')
+            
+            input('\nPressione ENTER para continuar...')
 
-                print(f'Total de números de séreis {numero_serie}')
-                input('Pressione uma tecla para continuar...')
-
-        case 0:
-            print('Fim do programa.')
+        case '0':
+            print('\nSaindo do programa...')
             break
+
         case _:
-            print('Opção invalida!')
-            input('Pressione uma tecla para continuar...')
+            print('Opção inválida!')
+            input('\nPressione ENTER para continuar...')

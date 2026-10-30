@@ -11,3 +11,22 @@ for i in range(3):
 print('\n= EXIBINDO NÚMEROS DO VETOR =')
 for valor in vetor_numeros:
     print(f'Valor: {valor}')
+
+soma = 0
+maior = vetor_numeros[0]
+menor = vetor_numeros[0]
+
+for valor in vetor_numeros:
+    soma = soma + valor
+    if valor > maior:
+        maior = valor
+    if valor < menor:
+        menor = valor
+
+media = soma / len(vetor_numeros)
+
+print('\n= RESULTADOS =')
+print(f'Soma: {soma}')
+print(f'Média: {media:.2f}')
+print(f'Maior: {maior}')
+print(f'Menor: {menor}')
